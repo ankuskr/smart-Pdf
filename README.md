@@ -31,8 +31,6 @@ A full-stack application built using Angular 16 and Node.js that enables users t
 
 ---
 
-``markdown
-
 ## 📁 Project Structure
 
 ```text
