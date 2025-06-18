@@ -1,6 +1,7 @@
 # form-to-pdf-generator-angular-node
-A full-stack Angular + Node.js application that collects user form data (14 fields) along with an e-signature, then generates a downloadable PDF document containing all the information.
-=======
+
+# A full-stack Angular + Node.js application that collects user form data (14 fields) along with an e-signature, then generates a downloadable PDF document containing all the information.
+
 # 📄 Form to PDF Generator (Angular + Node.js)
 
 A full-stack application built using Angular 16 and Node.js that enables users to fill out a form with 14 input fields, capture an e-signature, and generate a professional-looking PDF document with all submitted data.
@@ -30,22 +31,25 @@ A full-stack application built using Angular 16 and Node.js that enables users t
 
 ---
 
+``markdown
+
 ## 📁 Project Structure
 
+```text
 myapp/
 ├── server/
-│ ├── server.js
-│ ├── routes/
-│ └── utils/pdfGenerator.js
-├── src/ # Angular frontend
-│ ├── app/
-│ │ ├── components/
-│ │ │ ├── form/
-│ │ │ └── signature-pad/
-│ │ ├── services/
-│ │ └── app.module.ts
-│ ├── assets/
-│ └── index.html
+│   ├── server.js
+│   ├── routes/
+│   └── utils/pdfGenerator.js
+├── src/  # Angular frontend
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── form/
+│   │   │   └── signature-pad/
+│   │   ├── services/
+│   │   └── app.module.ts
+│   ├── assets/
+│   └── index.html
 ├── angular.json
 ├── package.json
 └── README.md
@@ -59,3 +63,4 @@ myapp/
 npm install
 🖥️ Running the App
 npm run dev
+```
