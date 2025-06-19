@@ -8,9 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HomeComponent } from './components/Home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, UserFormComponent],
+  declarations: [AppComponent, UserFormComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

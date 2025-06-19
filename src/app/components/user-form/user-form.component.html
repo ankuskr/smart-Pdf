@@ -44,15 +44,64 @@
       >Email is invalid.</small
     >
   </div>
+  <br />
+  <label for="password">Password:</label>
+  <input
+    id="password"
+    type="text"
+    formControlName="password"
+    placeholder="Enter password"
+  />
+  <div
+    *ngIf="
+      userForm.get('password')?.touched && userForm.get('password')?.invalid
+    "
+  >
+    <small *ngIf="userForm.get('password')?.errors?.['required']"
+      >Password is required.</small
+    >
+    <small *ngIf="userForm.get('password')?.errors?.['password']"
+      >Password is invalid.</small
+    >
+  </div>
+  <br />
+  <label for="conformpassword">Conform Password:</label>
+  <input
+    id="conformpassword"
+    type="text"
+    formControlName="conformpassword"
+    placeholder="Enter conformpassword"
+  />
+  <div
+    *ngIf="
+      userForm.get('conformpassword')?.touched &&
+      userForm.get('conformpassword')?.invalid
+    "
+  >
+    <small *ngIf="userForm.get('conformpassword')?.errors?.['required']"
+      >Conform Password is required.</small
+    >
+    <small *ngIf="userForm.get('conformpassword')?.errors?.['conformpassword']"
+      >Conform Password is invalid.</small
+    >
+  </div>
 
   <br />
   <label for="phoneNumber">Phone Number:</label>
-  <input
+  <!-- <input
     id="phoneNumber"
-    type="number"
+    type="text"
     formControlName="phoneNumber"
     placeholder="Enter phone number"
     (input)="limitPhoneNumber($event)"
+  /> -->
+  <input
+    id="phoneNumber"
+    type="text"
+    formControlName="phoneNumber"
+    placeholder="Enter phone number"
+    onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+    oninput="if (this.value.length > 0) {this.value = this.value.slice(0,10);}"
   />
   <div
     *ngIf="
@@ -173,12 +222,14 @@
   </div>
 
   <br />
-  <label for="zipCode">Zip Code:</label>
+  <label for="zipCode">Pin Code:</label>
   <input
     id="zipCode"
     type="text"
     formControlName="zipCode"
     placeholder="Enter zip code"
+    onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+    oninput="if (this.value.length > 0) {this.value = this.value.slice(0,6);}"
   />
   <div
     *ngIf="userForm.get('zipCode')?.touched && userForm.get('zipCode')?.invalid"
@@ -210,12 +261,20 @@
 
   <br />
   <label for="annualIncome">Annual Income:</label>
-  <input
+  <!-- <input
     id="annualIncome"
     type="number"
     formControlName="annualIncome"
     placeholder="Enter annual income"
     (keydown)="preventDecimal($event)"
+  /> -->
+  <input
+    id="annualIncome"
+    type="text"
+    formControlName="annualIncome"
+    placeholder="Enter annual income"
+    onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+    oninput="if (this.value.length > 0) {this.value = this.value.slice(0,4);}"
   />
 
   <div
@@ -228,34 +287,6 @@
   </div>
 
   <br />
-  <!-- <div class="form-group">
-    <label for="signature"
-      >Signature (Image Upload): <span style="color: red">*</span></label
-    >
-    <input
-      id="signature"
-      type="file"
-      accept="image/*"
-      (change)="onSignatureChange($event)"
-      #signatureInput
-    />
-
-    <div *ngIf="!signaturePreview && signatureRequired">
-      <small style="color: red">Signature is required.</small>
-    </div>
-
-    <div *ngIf="signaturePreview" style="margin-top: 10px">
-      <p><strong>Preview:</strong></p>
-      <img
-        [src]="signaturePreview"
-        alt="Signature Preview"
-        style="max-width: 300px; max-height: 150px; border: 1px solid #000"
-      />
-    </div>
-  </div> -->
-
-  <!-- <button type="submit">Submit</button> -->
-
   <div class="form-group">
     <label for="signature"
       >Signature (Image Upload): <span style="color: red">*</span></label

@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "aos": "^2.3.4",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
@@ -30,6 +31,7 @@
     "multer": "^2.0.1",
     "puppeteer": "^24.10.1",
     "rxjs": "~7.8.0",
+    "swiper": "^11.2.8",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

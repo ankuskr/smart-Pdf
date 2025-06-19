@@ -13,7 +13,7 @@ import { environment } from 'src/environment/environment';
 })
 export class UserFormComponent implements OnInit {
   userForm!: FormGroup;
-  countries = ['USA', 'India', 'Canada'];
+  countries = ['United States', 'India', 'Canada'];
   states: string[] = [];
   cities: string[] = [];
   predictedAge: number | null = null;
@@ -45,6 +45,8 @@ export class UserFormComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      conformpassword: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       dateOfBirth: ['', [Validators.required]],
       gender: ['', [Validators.required]],
@@ -92,8 +94,34 @@ export class UserFormComponent implements OnInit {
   }
 
   onStateChange(): void {
+    const selectedCountry = this.userForm.get('country')?.value;
     const selectedState = this.userForm.get('state')?.value;
-    this.cities = this.locationService.getCities(selectedState);
+    // this.cities = this.locationService.getCities(
+    //   selectedCountry,
+    //   selectedState
+    // );
+
+    // this.locationService.getCities(selectedCountry, selectedState).subscribe(
+    //   (cityList) => {
+    //     this.cities = cityList;
+    //     this.userForm.patchValue({ city: '' });
+    //   },
+    //   (error) => {
+    //     console.error('Failed to load cities:', error);
+    //     this.cities = [];
+    //   }
+    // );
+
+    this.locationService.getCities(selectedCountry, selectedState).subscribe({
+      next: (cityList) => {
+        this.cities = cityList;
+        this.userForm.patchValue({ city: '' });
+      },
+      error: (error) => {
+        console.error('Failed to load cities:', error);
+        this.cities = [];
+      },
+    });
     this.userForm.patchValue({ city: '' });
   }
 
@@ -119,15 +147,16 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  limitPhoneNumber(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.value.length > 10) {
-      input.value = input.value.slice(0, 10);
-      this.userForm.get('phoneNumber')?.setValue(input.value);
-    }
-  }
+  // limitPhoneNumber(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.value.length > 10) {
+  //     input.value = input.value.slice(0, 10);
+  //     this.userForm.get('phoneNumber')?.setValue(input.value);
+  //   }
+  // }
 
   onSignatureChange(event: any): void {
+    console.log('upload cll huwa');
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();

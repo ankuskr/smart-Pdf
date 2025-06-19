@@ -1,0 +1,183 @@
+<div
+  class="min-h-screen bg-gradient-to-br from-blue-100 to-white flex flex-col"
+>
+  <!-- Navbar -->
+  <nav
+    class="w-full py-4 px-8 flex justify-between items-center bg-white shadow"
+  >
+    <div class="text-2xl font-bold text-blue-600">SmartSuite</div>
+    <div class="space-x-6">
+      <a href="#" class="text-gray-600 hover:text-blue-500 font-medium"
+        >Features</a
+      >
+      <a href="#" class="text-gray-600 hover:text-blue-500 font-medium"
+        >Pricing</a
+      >
+      <a href="#" class="text-gray-600 hover:text-blue-500 font-medium"
+        >Contact</a
+      >
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition-all"
+        (click)="goToLogin($event)"
+      >
+        Sign In
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="flex-grow flex items-center justify-center px-8 py-16">
+    <div class="max-w-4xl text-center">
+      <h1
+        class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight mb-6"
+      >
+        Build Smarter, Faster & Better Solutions
+      </h1>
+      <p class="text-lg text-gray-600 mb-8">
+        Streamline your workflows, automate forms, and deliver seamless user
+        experiences with SmartSuite’s powerful platform.
+      </p>
+      <button
+        class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg shadow hover:bg-blue-700 transition-all"
+      >
+        Get Started
+      </button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="px-8 py-16 bg-white">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 text-center">
+      <div>
+        <div class="text-blue-600 text-5xl mb-4">🚀</div>
+        <h3 class="text-xl font-semibold mb-2">Fast Performance</h3>
+        <p class="text-gray-600">
+          Lightning-fast load times and smooth interactions for all users.
+        </p>
+      </div>
+      <div>
+        <div class="text-blue-600 text-5xl mb-4">🔒</div>
+        <h3 class="text-xl font-semibold mb-2">Secure Platform</h3>
+        <p class="text-gray-600">
+          We prioritize your data with end-to-end encryption and secure backups.
+        </p>
+      </div>
+      <div>
+        <div class="text-blue-600 text-5xl mb-4">⚙️</div>
+        <h3 class="text-xl font-semibold mb-2">Customizable</h3>
+        <p class="text-gray-600">
+          Easily adapt the system to fit your needs with modular features.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-20 bg-gray-50" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-center mb-12">What Users Say</h2>
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+      <div class="bg-white p-6 shadow rounded-lg" data-aos="fade-right">
+        <p class="mb-4">
+          “SmartSuite completely transformed how we handle form workflows. Super
+          fast and intuitive.”
+        </p>
+        <div class="font-semibold">— Priya S, Developer</div>
+      </div>
+      <div class="bg-white p-6 shadow rounded-lg" data-aos="fade-left">
+        <p class="mb-4">
+          “The design is clean and the features just work. Highly recommended
+          for teams.”
+        </p>
+        <div class="font-semibold">— John M, Product Manager</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-20 bg-white" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-center mb-12">Pricing Plans</h2>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
+      <div
+        class="border rounded-lg p-6 shadow hover:scale-105 transition"
+        data-aos="flip-left"
+      >
+        <h3 class="text-xl font-bold mb-4">Basic</h3>
+        <p class="text-3xl font-bold text-blue-600 mb-4">Free</p>
+        <ul class="text-gray-600 mb-6 space-y-2">
+          <li>✓ Core Features</li>
+          <li>✓ Limited Support</li>
+        </ul>
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Start Now
+        </button>
+      </div>
+      <div
+        class="border rounded-lg p-6 shadow-lg scale-105 bg-blue-50"
+        data-aos="flip-up"
+      >
+        <h3 class="text-xl font-bold mb-4">Pro</h3>
+        <p class="text-3xl font-bold text-blue-600 mb-4">₹499/mo</p>
+        <ul class="text-gray-600 mb-6 space-y-2">
+          <li>✓ All Features</li>
+          <li>✓ Priority Support</li>
+          <li>✓ Custom Forms</li>
+        </ul>
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Upgrade
+        </button>
+      </div>
+      <div
+        class="border rounded-lg p-6 shadow hover:scale-105 transition"
+        data-aos="flip-right"
+      >
+        <h3 class="text-xl font-bold mb-4">Enterprise</h3>
+        <p class="text-3xl font-bold text-blue-600 mb-4">Contact Us</p>
+        <ul class="text-gray-600 mb-6 space-y-2">
+          <li>✓ Custom Integration</li>
+          <li>✓ Dedicated Support</li>
+          <li>✓ SLA Guarantee</li>
+        </ul>
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Talk to Us
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section
+    id="newsletter"
+    class="py-20 bg-gradient-to-r from-blue-100 to-white"
+    data-aos="fade-up"
+  >
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-4">Stay Updated!</h2>
+      <p class="text-gray-600 mb-6">
+        Subscribe to our newsletter to receive updates and new feature alerts.
+      </p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          class="px-4 py-2 border rounded-lg w-full md:w-2/3"
+        />
+        <button
+          class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+        >
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-center py-6 mt-auto text-gray-500 text-sm">
+    © 2025 SmartSuite. All rights reserved.
+  </footer>
+</div>

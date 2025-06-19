@@ -36,6 +36,7 @@ export class UserService {
   }
 
   uploadSignature(formData: FormData) {
+    console.log('user service upload ', formData);
     return this.http.post<{ filePath: string }>(
       'http://localhost:3000/api/users/uploadSignature',
       formData
