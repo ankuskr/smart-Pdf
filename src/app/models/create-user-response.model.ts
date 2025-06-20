@@ -5,6 +5,8 @@ export interface CreateUserResponse {
     _id: string;
     fullName: string;
     email: string;
+    password: string;
+    conformpassword: string;
     phoneNumber: string;
     dateOfBirth: string;
     gender: string;

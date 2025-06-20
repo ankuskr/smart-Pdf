@@ -6,6 +6,8 @@ exports.createUser = async (req, res) => {
     const {
       fullName,
       email,
+      password,
+      conformpassword,
       phoneNumber,
       dateOfBirth,
       gender,
@@ -27,6 +29,8 @@ exports.createUser = async (req, res) => {
     const user = new User({
       fullName,
       email,
+      password,
+      conformpassword,
       phoneNumber,
       dateOfBirth,
       gender,
@@ -41,6 +45,7 @@ exports.createUser = async (req, res) => {
       signature,
     });
     user.pdfPath = await generatePDF(user);
+
     await user.save();
     res.status(201).json({
       success: true,

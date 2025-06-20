@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PredictedAgeResponse } from 'src/app/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 import { LocationService } from 'src/app/services/location.service';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environment/environment';
@@ -25,6 +24,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private _toaster: ToastrService,
     private userService: UserService,
     private locationService: LocationService
   ) {}
@@ -96,22 +96,6 @@ export class UserFormComponent implements OnInit {
   onStateChange(): void {
     const selectedCountry = this.userForm.get('country')?.value;
     const selectedState = this.userForm.get('state')?.value;
-    // this.cities = this.locationService.getCities(
-    //   selectedCountry,
-    //   selectedState
-    // );
-
-    // this.locationService.getCities(selectedCountry, selectedState).subscribe(
-    //   (cityList) => {
-    //     this.cities = cityList;
-    //     this.userForm.patchValue({ city: '' });
-    //   },
-    //   (error) => {
-    //     console.error('Failed to load cities:', error);
-    //     this.cities = [];
-    //   }
-    // );
-
     this.locationService.getCities(selectedCountry, selectedState).subscribe({
       next: (cityList) => {
         this.cities = cityList;
@@ -147,16 +131,7 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  // limitPhoneNumber(event: Event): void {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.value.length > 10) {
-  //     input.value = input.value.slice(0, 10);
-  //     this.userForm.get('phoneNumber')?.setValue(input.value);
-  //   }
-  // }
-
   onSignatureChange(event: any): void {
-    console.log('upload cll huwa');
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
@@ -181,25 +156,47 @@ export class UserFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userForm.valid && !this.signatureRequired) {
-      this.isLoading = true;
-      this.userService.createUser(this.userForm.value).subscribe({
-        next: (resp: any) => {
-          this.isLoading = false;
-          alert('User data submitted successfully!');
-          this.resetAllFields();
-          const pdfPath = resp.data.pdfPath;
-          const baseUrl = 'http://localhost:3000';
-          const pdfUrl = baseUrl + pdfPath;
-          window.open(pdfUrl, '_blank');
-        },
-        error: () => {
-          this.isLoading = false;
-          alert('Error submitting data to backend');
-        },
-      });
+      this.submitUserData();
     } else {
       this.handleInvalidForm();
     }
+  }
+  passwordMatched(): void {
+    const password = this.userForm.get('password')?.value;
+    const conformpassword = this.userForm.get('conformpassword')?.value;
+    if (password === conformpassword) {
+      console.log('both password is same');
+      console.log('passwoed', password);
+      console.log('passwoed', conformpassword);
+      return;
+    } else {
+      console.log('both password is not  same');
+      console.log('passwoed', password);
+      console.log('passwoed', conformpassword);
+    }
+  }
+
+  submitUserData(): void {
+    this.isLoading = true;
+    this.userService.createUser(this.userForm.value).subscribe({
+      next: (resp: any) => this.handleSuccessResponse(resp),
+      error: () => this.handleErrorResponse(),
+    });
+  }
+
+  handleSuccessResponse(resp: any): void {
+    this.isLoading = false;
+    this._toaster.success('User data saved successfully');
+    this.resetAllFields();
+    const baseUrl = 'http://localhost:3000';
+    const pdfUrl = `${baseUrl}${resp.data.pdfPath}`;
+    window.open(pdfUrl, '_blank');
+  }
+
+  handleErrorResponse(): void {
+    this.isLoading = false;
+    this._toaster.error('Failed to save user data');
+    alert('Error submitting data to backend');
   }
 
   handleInvalidForm(): void {

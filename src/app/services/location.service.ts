@@ -55,26 +55,6 @@ export class LocationService {
     return states[country] || [];
   }
 
-  // getCities(country: string, state: string): string[] {
-  //   this.restClient.getCityData(country, state).subscribe((response) => {
-  //     console.log(response.data);
-  //     citiesByState = response.data;
-  //   });
-  //   let citiesByState: { [key: string]: string[] } = {
-  //     California: ['Los Angeles', 'San Francisco', 'San Diego'],
-  //     Texas: ['Houston', 'Austin', 'Dallas'],
-  //     'New York': ['New York City', 'Buffalo', 'Rochester'],
-  //     Maharashtra: ['Mumbai', 'Pune', 'Nagpur'],
-  //     Karnataka: ['Bangalore', 'Mysore', 'Mangalore'],
-  //     Delhi: ['New Delhi', 'Noida', 'Gurgaon'],
-  //     Ontario: ['Toronto', 'Ottawa', 'Hamilton'],
-  //     Quebec: ['Montreal', 'Quebec City', 'Laval'],
-  //     'British Columbia': ['Vancouver', 'Victoria', 'Kelowna'],
-  //   };
-  //   console.log('citiesByState', citiesByState);
-
-  //   return citiesByState[state] || [];
-  // }
   getCities(country: string, state: string): Observable<string[]> {
     return this.restClient
       .getCityData(country, state)

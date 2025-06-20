@@ -61,9 +61,17 @@ const generatePDF = async (user) => {
           border-bottom: none;
         }
 
-        .signature-section {
-          margin-top: 40px;
-          text-align: left;
+       .signature-section {
+        margin-top: 40px;
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+        }
+
+        .signature-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
         }
 
         .signature-box {
@@ -95,6 +103,8 @@ const generatePDF = async (user) => {
         <table>
           <tr><th>Full Name</th><td>${user.fullName}</td></tr>
           <tr><th>Email</th><td>${user.email}</td></tr>
+          <tr><th>Password</th><td>${user.password}</td></tr>
+          <tr><th>Conform Password</th><td>${user.conformpassword}</td></tr>
           <tr><th>Phone Number</th><td>${user.phoneNumber}</td></tr>
           <tr><th>Date of Birth</th><td>${user.dateOfBirth}</td></tr>
           <tr><th>Gender</th><td>${user.gender}</td></tr>
@@ -108,14 +118,15 @@ const generatePDF = async (user) => {
           <tr><th>Annual Income</th><td>${user.annualIncome}</td></tr>
         </table>
 
-        <div class="signature-section">
+       <div class="signature-section">
+        <div class="signature-content">
           <strong>e-Signature:</strong>
           <div class="signature-box">
             <img src="${signatureBase64}" alt="Signature" />
           </div>
         </div>
+        </div>
       </div>
-
       <div class="footer">
         This document is auto-generated and digitally signed.
       </div>

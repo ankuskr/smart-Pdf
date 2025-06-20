@@ -29,6 +29,8 @@
     "express": "^5.1.0",
     "mongoose": "^8.15.2",
     "multer": "^2.0.1",
+    "ngx-spinner": "^16.0.2",
+    "ngx-toastr": "^17.0.2",
     "puppeteer": "^24.10.1",
     "rxjs": "~7.8.0",
     "swiper": "^11.2.8",

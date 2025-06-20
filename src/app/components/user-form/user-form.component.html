@@ -1,326 +1,347 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <br />
-  <label for="fullName">Full Name:</label>
-  <input
-    id="fullName"
-    type="text"
-    formControlName="fullName"
-    placeholder="Enter full name"
-  />
-  <div
-    *ngIf="
-      userForm.get('fullName')?.touched && userForm.get('fullName')?.invalid
-    "
-  >
-    <small *ngIf="userForm.get('fullName')?.errors?.['required']"
-      >Full name is required.</small
+<div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <br />
+    <br />
+    <label for="fullName">Full Name:</label>
+    <input
+      id="fullName"
+      type="text"
+      formControlName="fullName"
+      placeholder="Enter full name"
+    />
+    <div
+      *ngIf="
+        userForm.get('fullName')?.touched && userForm.get('fullName')?.invalid
+      "
     >
-    <small *ngIf="userForm.get('fullName')?.errors?.['minlength']"
-      >Minimum 2 characters.</small
-    >
-    <small *ngIf="userForm.get('fullName')?.errors?.['maxlength']"
-      >Maximum 50 characters.</small
-    >
-  </div>
+      <small *ngIf="userForm.get('fullName')?.errors?.['required']"
+        >Full name is required.</small
+      >
+      <small *ngIf="userForm.get('fullName')?.errors?.['minlength']"
+        >Minimum 2 characters.</small
+      >
+      <small *ngIf="userForm.get('fullName')?.errors?.['maxlength']"
+        >Maximum 50 characters.</small
+      >
+    </div>
 
-  <br />
-  <div *ngIf="predictedAge">
-    <strong>Predicted Age:</strong> {{ predictedAge }}
-  </div>
+    <br />
+    <div *ngIf="predictedAge">
+      <strong>Predicted Age:</strong> {{ predictedAge }}
+    </div>
 
-  <br />
-  <label for="email">Email:</label>
-  <input
-    id="email"
-    type="email"
-    formControlName="email"
-    placeholder="Enter email"
-  />
-  <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid">
-    <small *ngIf="userForm.get('email')?.errors?.['required']"
-      >Email is required.</small
+    <br />
+    <label for="email">Email:</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="Enter email"
+    />
+    <div
+      *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid"
     >
-    <small *ngIf="userForm.get('email')?.errors?.['email']"
-      >Email is invalid.</small
+      <small *ngIf="userForm.get('email')?.errors?.['required']"
+        >Email is required.</small
+      >
+      <small *ngIf="userForm.get('email')?.errors?.['email']"
+        >Email is invalid.</small
+      >
+    </div>
+    <br />
+    <label for="password">Password:</label>
+    <input
+      id="password"
+      type="text"
+      formControlName="password"
+      placeholder="Enter password"
+    />
+    <div
+      *ngIf="
+        userForm.get('password')?.touched && userForm.get('password')?.invalid
+      "
     >
-  </div>
-  <br />
-  <label for="password">Password:</label>
-  <input
-    id="password"
-    type="text"
-    formControlName="password"
-    placeholder="Enter password"
-  />
-  <div
-    *ngIf="
-      userForm.get('password')?.touched && userForm.get('password')?.invalid
-    "
-  >
-    <small *ngIf="userForm.get('password')?.errors?.['required']"
-      >Password is required.</small
+      <small *ngIf="userForm.get('password')?.errors?.['required']"
+        >Password is required.</small
+      >
+      <small *ngIf="userForm.get('password')?.errors?.['password']"
+        >Password is invalid.</small
+      >
+    </div>
+    <br />
+    <label for="conformpassword">Conform Password:</label>
+    <input
+      id="conformpassword"
+      type="text"
+      formControlName="conformpassword"
+      placeholder="Enter conformpassword"
+    />
+    <div
+      *ngIf="
+        userForm.get('conformpassword')?.touched &&
+        userForm.get('conformpassword')?.invalid
+      "
     >
-    <small *ngIf="userForm.get('password')?.errors?.['password']"
-      >Password is invalid.</small
-    >
-  </div>
-  <br />
-  <label for="conformpassword">Conform Password:</label>
-  <input
-    id="conformpassword"
-    type="text"
-    formControlName="conformpassword"
-    placeholder="Enter conformpassword"
-  />
-  <div
-    *ngIf="
-      userForm.get('conformpassword')?.touched &&
-      userForm.get('conformpassword')?.invalid
-    "
-  >
-    <small *ngIf="userForm.get('conformpassword')?.errors?.['required']"
-      >Conform Password is required.</small
-    >
-    <small *ngIf="userForm.get('conformpassword')?.errors?.['conformpassword']"
-      >Conform Password is invalid.</small
-    >
-  </div>
+      <small *ngIf="userForm.get('conformpassword')?.errors?.['required']"
+        >Conform Password is required.</small
+      >
+      <small *ngIf="userForm.hasError('mismatch')"
+        >Conform Password is invalid.</small
+      >
+      <small
+        *ngIf="
+          userForm.hasError('mismatch') &&
+          userForm.get('conformpassword')?.touched
+        "
+        class="text-danger"
+      >
+        Passwords don't match
+      </small>
+    </div>
 
-  <br />
-  <label for="phoneNumber">Phone Number:</label>
-  <!-- <input
+    <br />
+    <label for="phoneNumber">Phone Number:</label>
+    <!-- <input
     id="phoneNumber"
     type="text"
     formControlName="phoneNumber"
     placeholder="Enter phone number"
     (input)="limitPhoneNumber($event)"
   /> -->
-  <input
-    id="phoneNumber"
-    type="text"
-    formControlName="phoneNumber"
-    placeholder="Enter phone number"
-    onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
-    oninput="if (this.value.length > 0) {this.value = this.value.slice(0,10);}"
-  />
-  <div
-    *ngIf="
-      userForm.get('phoneNumber')?.touched &&
-      userForm.get('phoneNumber')?.invalid
-    "
-  >
-    <small *ngIf="userForm.get('phoneNumber')?.errors?.['required']"
-      >Phone number is required.</small
+    <input
+      id="phoneNumber"
+      type="text"
+      formControlName="phoneNumber"
+      placeholder="Enter phone number"
+      onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+      oninput="if (this.value.length > 0) {this.value = this.value.slice(0,10);}"
+    />
+    <div
+      *ngIf="
+        userForm.get('phoneNumber')?.touched &&
+        userForm.get('phoneNumber')?.invalid
+      "
     >
-    <small *ngIf="userForm.get('phoneNumber')?.errors?.['pattern']"
-      >Must be a 10-digit number.</small
+      <small *ngIf="userForm.get('phoneNumber')?.errors?.['required']"
+        >Phone number is required.</small
+      >
+      <small *ngIf="userForm.get('phoneNumber')?.errors?.['pattern']"
+        >Must be a 10-digit number.</small
+      >
+    </div>
+
+    <br />
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input id="dateOfBirth" type="date" formControlName="dateOfBirth" />
+    <div
+      *ngIf="
+        userForm.get('dateOfBirth')?.touched &&
+        userForm.get('dateOfBirth')?.invalid
+      "
     >
-  </div>
+      <small *ngIf="userForm.get('dateOfBirth')?.errors?.['required']"
+        >Date of birth is required.</small
+      >
+      <small *ngIf="userForm.get('dateOfBirth')?.errors?.['minAge']"
+        >Must be at least 18 years old.</small
+      >
+    </div>
 
-  <br />
-  <label for="dateOfBirth">Date of Birth:</label>
-  <input id="dateOfBirth" type="date" formControlName="dateOfBirth" />
-  <div
-    *ngIf="
-      userForm.get('dateOfBirth')?.touched &&
-      userForm.get('dateOfBirth')?.invalid
-    "
-  >
-    <small *ngIf="userForm.get('dateOfBirth')?.errors?.['required']"
-      >Date of birth is required.</small
+    <br />
+    <label for="gender">Gender:</label>
+    <select id="gender" formControlName="gender">
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <div
+      *ngIf="userForm.get('gender')?.touched && userForm.get('gender')?.invalid"
     >
-    <small *ngIf="userForm.get('dateOfBirth')?.errors?.['minAge']"
-      >Must be at least 18 years old.</small
+      <small>Gender is required.</small>
+    </div>
+
+    <br />
+    <label for="address1">Address Line 1:</label>
+    <input
+      id="address1"
+      type="text"
+      formControlName="addressLine1"
+      placeholder="Enter address line 1"
+    />
+    <div
+      *ngIf="
+        userForm.get('addressLine1')?.touched &&
+        userForm.get('addressLine1')?.invalid
+      "
     >
-  </div>
+      <small *ngIf="userForm.get('addressLine1')?.errors?.['required']"
+        >Address is required.</small
+      >
+      <small *ngIf="userForm.get('addressLine1')?.errors?.['maxlength']"
+        >Maximum 100 characters.</small
+      >
+    </div>
 
-  <br />
-  <label for="gender">Gender:</label>
-  <select id="gender" formControlName="gender">
-    <option value="">Select Gender</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
-  </select>
-  <div
-    *ngIf="userForm.get('gender')?.touched && userForm.get('gender')?.invalid"
-  >
-    <small>Gender is required.</small>
-  </div>
-
-  <br />
-  <label for="address1">Address Line 1:</label>
-  <input
-    id="address1"
-    type="text"
-    formControlName="addressLine1"
-    placeholder="Enter address line 1"
-  />
-  <div
-    *ngIf="
-      userForm.get('addressLine1')?.touched &&
-      userForm.get('addressLine1')?.invalid
-    "
-  >
-    <small *ngIf="userForm.get('addressLine1')?.errors?.['required']"
-      >Address is required.</small
+    <br />
+    <label for="address2">Address Line 2:</label>
+    <input
+      id="address2"
+      type="text"
+      formControlName="addressLine2"
+      placeholder="Enter address line 2"
+    />
+    <div
+      *ngIf="
+        userForm.get('addressLine2')?.touched &&
+        userForm.get('addressLine2')?.invalid
+      "
     >
-    <small *ngIf="userForm.get('addressLine1')?.errors?.['maxlength']"
-      >Maximum 100 characters.</small
+      <small>Maximum 100 characters.</small>
+    </div>
+
+    <br />
+    <label for="country">Country:</label>
+    <select id="country" formControlName="country" (change)="onCountryChange()">
+      <option value="">Select Country</option>
+      <option *ngFor="let country of countries" [value]="country">
+        {{ country }}
+      </option>
+    </select>
+    <div
+      *ngIf="
+        userForm.get('country')?.touched && userForm.get('country')?.invalid
+      "
     >
-  </div>
+      <small>Country is required.</small>
+    </div>
 
-  <br />
-  <label for="address2">Address Line 2:</label>
-  <input
-    id="address2"
-    type="text"
-    formControlName="addressLine2"
-    placeholder="Enter address line 2"
-  />
-  <div
-    *ngIf="
-      userForm.get('addressLine2')?.touched &&
-      userForm.get('addressLine2')?.invalid
-    "
-  >
-    <small>Maximum 100 characters.</small>
-  </div>
-
-  <br />
-  <label for="country">Country:</label>
-  <select id="country" formControlName="country" (change)="onCountryChange()">
-    <option value="">Select Country</option>
-    <option *ngFor="let country of countries" [value]="country">
-      {{ country }}
-    </option>
-  </select>
-  <div
-    *ngIf="userForm.get('country')?.touched && userForm.get('country')?.invalid"
-  >
-    <small>Country is required.</small>
-  </div>
-
-  <br />
-  <label for="state">State:</label>
-  <select id="state" formControlName="state" (change)="onStateChange()">
-    <option value="">Select State</option>
-    <option *ngFor="let state of states" [value]="state">{{ state }}</option>
-  </select>
-  <div *ngIf="userForm.get('state')?.touched && userForm.get('state')?.invalid">
-    <small>State is required.</small>
-  </div>
-
-  <br />
-  <label for="city">City:</label>
-  <select id="city" formControlName="city">
-    <option value="">Select City</option>
-    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-  </select>
-  <div *ngIf="userForm.get('city')?.touched && userForm.get('city')?.invalid">
-    <small>City is required.</small>
-  </div>
-
-  <br />
-  <label for="zipCode">Pin Code:</label>
-  <input
-    id="zipCode"
-    type="text"
-    formControlName="zipCode"
-    placeholder="Enter zip code"
-    onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
-    oninput="if (this.value.length > 0) {this.value = this.value.slice(0,6);}"
-  />
-  <div
-    *ngIf="userForm.get('zipCode')?.touched && userForm.get('zipCode')?.invalid"
-  >
-    <small *ngIf="userForm.get('zipCode')?.errors?.['required']"
-      >Zip code is required.</small
+    <br />
+    <label for="state">State:</label>
+    <select id="state" formControlName="state" (change)="onStateChange()">
+      <option value="">Select State</option>
+      <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+    </select>
+    <div
+      *ngIf="userForm.get('state')?.touched && userForm.get('state')?.invalid"
     >
-    <small *ngIf="userForm.get('zipCode')?.errors?.['pattern']"
-      >Zip code must be 5–6 alphanumeric characters.</small
+      <small>State is required.</small>
+    </div>
+
+    <br />
+    <label for="city">City:</label>
+    <select id="city" formControlName="city">
+      <option value="">Select City</option>
+      <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+    </select>
+    <div *ngIf="userForm.get('city')?.touched && userForm.get('city')?.invalid">
+      <small>City is required.</small>
+    </div>
+
+    <br />
+    <label for="zipCode">Pin Code:</label>
+    <input
+      id="zipCode"
+      type="text"
+      formControlName="zipCode"
+      placeholder="Enter zip code"
+      onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+      oninput="if (this.value.length > 0) {this.value = this.value.slice(0,6);}"
+    />
+    <div
+      *ngIf="
+        userForm.get('zipCode')?.touched && userForm.get('zipCode')?.invalid
+      "
     >
-  </div>
+      <small *ngIf="userForm.get('zipCode')?.errors?.['required']"
+        >Zip code is required.</small
+      >
+      <small *ngIf="userForm.get('zipCode')?.errors?.['pattern']"
+        >Zip code must be 5–6 alphanumeric characters.</small
+      >
+    </div>
 
-  <br />
-  <label for="occupation">Occupation:</label>
-  <select id="occupation" formControlName="occupation">
-    <option value="">Select Occupation</option>
-    <option value="Student">Student</option>
-    <option value="Engineer">Engineer</option>
-    <option value="Doctor">Doctor</option>
-    <option value="Other">Other</option>
-  </select>
-  <div
-    *ngIf="
-      userForm.get('occupation')?.touched && userForm.get('occupation')?.invalid
-    "
-  >
-    <small>Occupation is required.</small>
-  </div>
+    <br />
+    <label for="occupation">Occupation:</label>
+    <select id="occupation" formControlName="occupation">
+      <option value="">Select Occupation</option>
+      <option value="Student">Student</option>
+      <option value="Engineer">Engineer</option>
+      <option value="Doctor">Doctor</option>
+      <option value="Other">Other</option>
+    </select>
+    <div
+      *ngIf="
+        userForm.get('occupation')?.touched &&
+        userForm.get('occupation')?.invalid
+      "
+    >
+      <small>Occupation is required.</small>
+    </div>
 
-  <br />
-  <label for="annualIncome">Annual Income:</label>
-  <!-- <input
+    <br />
+    <label for="annualIncome">Annual Income:</label>
+    <!-- <input
     id="annualIncome"
     type="number"
     formControlName="annualIncome"
     placeholder="Enter annual income"
     (keydown)="preventDecimal($event)"
   /> -->
-  <input
-    id="annualIncome"
-    type="text"
-    formControlName="annualIncome"
-    placeholder="Enter annual income"
-    onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
-    oninput="if (this.value.length > 0) {this.value = this.value.slice(0,4);}"
-  />
-
-  <div
-    *ngIf="
-      userForm.get('annualIncome')?.touched &&
-      userForm.get('annualIncome')?.invalid
-    "
-  >
-    <small>Income must be a positive number.</small>
-  </div>
-
-  <br />
-  <div class="form-group">
-    <label for="signature"
-      >Signature (Image Upload): <span style="color: red">*</span></label
-    >
     <input
-      id="signature"
-      type="file"
-      accept="image/*"
-      (change)="onSignatureChange($event)"
-      name="signature"
-      #signatureInput
+      id="annualIncome"
+      type="text"
+      formControlName="annualIncome"
+      placeholder="Enter annual income"
+      onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+      oninput="if (this.value.length > 0) {this.value = this.value.slice(0,4);}"
     />
-    <div *ngIf="!signaturePreview && signatureRequired">
-      <small style="color: red">Signature is required.</small>
+
+    <div
+      *ngIf="
+        userForm.get('annualIncome')?.touched &&
+        userForm.get('annualIncome')?.invalid
+      "
+    >
+      <small>Income must be a positive number.</small>
     </div>
-    <div *ngIf="signaturePreview" style="margin-top: 10px">
-      <p><strong>Preview:</strong></p>
-      <img
-        [src]="signaturePreview"
-        alt="Signature Preview"
-        style="max-width: 300px; max-height: 150px; border: 1px solid #000"
+
+    <br />
+    <div class="form-group">
+      <label for="signature"
+        >Signature (Image Upload): <span style="color: red">*</span></label
+      >
+      <input
+        id="signature"
+        type="file"
+        accept="image/*"
+        (change)="onSignatureChange($event)"
+        name="signature"
+        #signatureInput
       />
+      <div *ngIf="!signaturePreview && signatureRequired">
+        <small style="color: red">Signature is required.</small>
+      </div>
+      <div *ngIf="signaturePreview" style="margin-top: 10px">
+        <p><strong>Preview:</strong></p>
+        <img
+          [src]="signaturePreview"
+          alt="Signature Preview"
+          style="max-width: 300px; max-height: 150px; border: 1px solid #000"
+        />
+      </div>
     </div>
-  </div>
-  <button
-    type="submit"
-    [disabled]="isLoading"
-    class="btn btn-primary"
-    style="position: relative; padding-left: 2.5rem"
-  >
-    <ng-container *ngIf="!isLoading; else loading"> Submit </ng-container>
-    <ng-template #loading>
-      <span class="spinner-circle"></span>
-      Submitting...
-    </ng-template>
-  </button>
-</form>
+    <button
+      type="submit"
+      [disabled]="isLoading"
+      class="btn btn-primary"
+      style="position: relative; padding-left: 2.5rem"
+    >
+      <ng-container *ngIf="!isLoading; else loading"> Submit </ng-container>
+      <ng-template #loading>
+        <span class="spinner-circle"></span>
+        Submitting...
+      </ng-template>
+    </button>
+  </form>
+</div>
